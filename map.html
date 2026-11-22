@@ -50,7 +50,7 @@ const projection = d3.geoAzimuthalEqualArea().rotate([-14, -52]).fitExtent([[8, 
 const path = d3.geoPath(projection);
 const tip = d3.select('#tip'), wrap = document.getElementById('wrap');
 
-const EUROPE = new Set(['Belarus','Slovakia','Bosnia and Herzegovina','Kosovo','Montenegro','Albania','Armenia','Azerbaijan','Turkey','Iceland','Liechtenstein','Andorra','Monaco','San Marino','Vatican','Faroe Islands','Isle of Man','Jersey','Guernsey','Netherlands','Åland']);
+const EUROPE = new Set(['Belarus','Slovakia','Bosnia and Herzegovina','Kosovo','Greece','Armenia','Turkey','Iceland','Liechtenstein','Andorra','Monaco','San Marino','Vatican','Faroe Islands','Isle of Man','Jersey','Guernsey','Netherlands']);
 Promise.all([d3.json('data/europe.geo.json'), d3.json('data/members.json')]).then(([geo, data]) => {
   const M = data.countries, notes = data.notes || {};
   const fill = name => M[name] ? CAT[M[name].status].fill() : EUROPE.has(name) ? css('--none') : css('--outside');
