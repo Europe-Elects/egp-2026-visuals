@@ -1,0 +1,71 @@
+:root {
+  --surface: #ffffff;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #6f6e69;
+  --border: #d3d1c7;
+  --border-strong: #888780;
+  --chip: #f1efe8;
+  --grid: #e1e0d9;
+  --gain: #2a78d6;
+  --loss: #e34948;
+  --mixed: #b4b2a9;
+  --prev: #b4b2a9;
+  --none: #f4f3ef;
+  --member: #dbe7f5;
+  --hatch-bg: #ecebe6;
+  --hatch-line: #888780;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #151515;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #9a9992;
+    --border: #444441;
+    --border-strong: #898781;
+    --chip: #262624;
+    --grid: #2c2c2a;
+    --gain: #3987e5;
+    --loss: #e66767;
+    --mixed: #6b6a65;
+    --prev: #6b6a65;
+    --none: #1f1f1e;
+    --member: #2b3a4d;
+    --hatch-bg: #2a2a28;
+    --hatch-line: #898781;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+h1 { font-size: 18px; font-weight: 700; margin: 0 0 4px; }
+.sub { color: var(--ink-2); margin: 0 0 12px; font-size: 13px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-2); margin: 0 0 10px; }
+.legend span { display: flex; align-items: center; gap: 5px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 8px; }
+.filters .label { font-size: 12px; color: var(--ink-3); width: 52px; }
+.filters button {
+  font: inherit; font-size: 12px; padding: 4px 10px; border-radius: 6px;
+  border: 1px solid var(--border); background: transparent; color: var(--ink); cursor: pointer;
+}
+.filters button[aria-pressed="true"] { background: var(--chip); border-color: var(--border-strong); }
+.filters button:focus-visible { outline: 2px solid var(--gain); outline-offset: 1px; }
+.chart { position: relative; width: 100%; }
+.tip {
+  position: absolute; pointer-events: none; opacity: 0;
+  background: var(--surface); color: var(--ink);
+  border: 1px solid var(--border-strong); border-radius: 6px;
+  padding: 8px 10px; font-size: 12px; line-height: 1.5; max-width: 250px;
+}
+.tip b { font-weight: 700; }
+.tip .muted { color: var(--ink-2); }
+.source { margin: 10px 0 0; font-size: 11px; color: var(--ink-3); }
+.empty { font-size: 13px; color: var(--ink-2); }

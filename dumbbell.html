@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>European Greens in 2026: previous result vs 2026</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Gains in the North, losses in the centre and South</h1>
+<p class="sub">Green vote share at the previous election and in 2026, by contest, sorted by change.</p>
+<div class="filters" id="fRegion" role="group" aria-label="Filter by region"><span class="label">Region</span></div>
+<div class="filters" id="fType" role="group" aria-label="Filter by election type"><span class="label">Type</span></div>
+<div class="legend">
+  <span><svg width="10" height="10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="var(--prev)"/></svg>Previous election</span>
+  <span><svg width="10" height="10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="var(--gain)"/></svg>2026, gain</span>
+  <span><svg width="10" height="10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="var(--loss)"/></svg>2026, loss</span>
+</div>
+<div class="chart" id="wrap">
+  <div id="chart"></div>
+  <div class="tip" id="tip" role="status"></div>
+</div>
+<p class="source">Data: national and regional electoral authorities. Changes are relative to the previous election of the same type in the same area. Draft, November 2026.</p>
+
+<script src="lib/d3.min.js"></script>
+<script>
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let rowsAll = [], fR = 'All', fT = 'All';
+const W = 680, LEFT = 200, RIGHT = 60, RH = 24;
+const x = d3.scaleLinear().domain([0, 42]).range([LEFT, W - RIGHT]);
+const host = d3.select('#chart'), tip = d3.select('#tip'), wrap = document.getElementById('wrap');
+const fmt = v => (v > 0 ? '+' : v < 0 ? '−' : '±') + Math.abs(v).toFixed(1);
+
+function buttons(id, options, set) {
+  const el = d3.select('#' + id);
+  options.forEach(o => el.append('button').text(o).attr('aria-pressed', o === 'All')
+    .on('click', function () { set(o); el.selectAll('button').attr('aria-pressed', function () { return this.textContent === o; }); draw(); }));
+}
+buttons('fRegion', ['All', 'North', 'Central', 'South and East'], v => fR = v);
+buttons('fType', ['All', 'National', 'Regional', 'Local', 'By-election'], v => fT = v);
+
+function draw() {
+  const rows = rowsAll.filter(d => (fR === 'All' || d.region === fR) && (fT === 'All' || d.type === fT))
+    .sort((a, b) => b.change - a.change);
+  host.html('');
+  if (!rows.length) { host.append('p').attr('class', 'empty').text('No contests match these filters.'); return; }
+  const H = rows.length * RH + 30;
+  const svg = host.append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%')
+    .attr('role', 'img').attr('aria-label', 'Previous and 2026 Green vote share per contest');
+  [0, 10, 20, 30, 40].forEach(v => {
+    svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', 4).attr('y2', H - 22).attr('stroke', css('--grid'));
+    svg.append('text').attr('x', x(v)).attr('y', H - 6).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', css('--ink-3')).text(v + '%');
+  });
+  const surface = css('--surface');
+  const g = svg.selectAll('g.row').data(rows).join('g').attr('class', 'row').attr('transform', (d, i) => `translate(0,${i * RH + 14})`);
+  g.append('rect').attr('x', 0).attr('y', -RH / 2).attr('width', W).attr('height', RH).attr('fill', 'transparent');
+  g.append('text').attr('x', LEFT - 12).attr('y', 4).attr('text-anchor', 'end').attr('font-size', 12).attr('fill', css('--ink-2')).text(d => d.contest);
+  g.append('line').attr('x1', d => x(d.previous)).attr('x2', d => x(d.result))
+    .attr('stroke', d => d.change >= 0 ? css('--gain') : css('--loss')).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('opacity', 0.55);
+  g.append('circle').attr('cx', d => x(d.previous)).attr('r', 4.5).attr('fill', css('--prev')).attr('stroke', surface).attr('stroke-width', 2);
+  g.append('circle').attr('cx', d => x(d.result)).attr('r', 5)
+    .attr('fill', d => d.change >= 0 ? css('--gain') : css('--loss')).attr('stroke', surface).attr('stroke-width', 2);
+  g.append('text').attr('x', d => x(Math.max(d.previous, d.result)) + 10).attr('y', 4).attr('font-size', 11).attr('fill', css('--ink-3')).text(d => fmt(d.change));
+  g.on('mousemove', (ev, d) => {
+    const b = wrap.getBoundingClientRect();
+    let px = ev.clientX - b.left + 12, py = ev.clientY - b.top + 12;
+    if (px > b.width - 240) px -= 252;
+    tip.html(`<b>${d.contest}</b><br><span class="muted">${d.party} · ${d.type}</span><br>${d.previous.toFixed(1)}% → <b>${d.result.toFixed(1)}%</b> <span class="muted">(${fmt(d.change)} pts)</span>`)
+      .style('left', px + 'px').style('top', py + 'px').style('opacity', 1);
+  }).on('mouseleave', () => tip.style('opacity', 0));
+}
+
+d3.csv('data/contests.csv', d => ({
+  contest: d.contest, region: d.region, type: d.type, party: d.party,
+  previous: +d.previous, result: +d.result, change: +(d.result - d.previous).toFixed(1)
+})).then(data => { rowsAll = data; draw(); });
+</script>
+</body>
+</html>

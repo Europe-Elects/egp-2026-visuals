@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>European Green Party members and their 2026 results</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Where the European Greens stand after 2026</h1>
+<p class="sub">EGP member parties by country, coloured by how they fared in this year’s elections. Hover over a country for details.</p>
+<div class="legend" id="legend"></div>
+<div class="chart" id="wrap">
+  <div id="map"></div>
+  <div class="tip" id="tip" role="status"></div>
+</div>
+<p class="source">Data: national and regional electoral authorities; European Green Party. Map: Natural Earth. Draft, November 2026.</p>
+
+<script src="lib/d3.min.js"></script>
+<script>
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const CAT = {
+  gains:       { label: 'Gains', fill: () => css('--gain') },
+  mixed:       { label: 'Mixed', fill: () => css('--mixed') },
+  setbacks:    { label: 'Setbacks', fill: () => css('--loss') },
+  did_not_run: { label: 'Did not run', fill: () => 'url(#hatch)' },
+  pending:     { label: 'Pending (29 Nov)', fill: () => 'url(#dots)' },
+  no_election: { label: 'Member, no 2026 election', fill: () => css('--member') }
+};
+const W = 680, H = 540;
+const svg = d3.select('#map').append('svg')
+  .attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%')
+  .attr('role', 'img').attr('aria-label', 'Map of European Green Party member countries coloured by 2026 outcome. Crimea is shown as part of Ukraine and Cyprus as one country.');
+const defs = svg.append('defs');
+const hatch = defs.append('pattern').attr('id', 'hatch').attr('width', 6).attr('height', 6)
+  .attr('patternUnits', 'userSpaceOnUse').attr('patternTransform', 'rotate(45)');
+hatch.append('rect').attr('width', 6).attr('height', 6).attr('fill', css('--hatch-bg'));
+hatch.append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 6).attr('stroke', css('--hatch-line')).attr('stroke-width', 1.6);
+const dots = defs.append('pattern').attr('id', 'dots').attr('width', 5).attr('height', 5).attr('patternUnits', 'userSpaceOnUse');
+dots.append('rect').attr('width', 5).attr('height', 5).attr('fill', css('--member'));
+dots.append('circle').attr('cx', 2.5).attr('cy', 2.5).attr('r', 1.1).attr('fill', css('--gain'));
+
+const legend = d3.select('#legend');
+const swatch = fill => `<svg width="12" height="12" aria-hidden="true"><rect width="12" height="12" rx="2" fill="${fill}" stroke="${css('--border')}" stroke-width="0.5"/></svg>`;
+Object.values(CAT).forEach(c => legend.append('span').html(swatch(c.fill()) + c.label));
+legend.append('span').html(swatch(css('--none')) + 'No EGP member');
+
+const frame = { type: 'MultiPoint', coordinates: [[-24, 36], [-10, 64], [30, 71], [50, 62], [50, 38], [25, 34], [0, 35]] };
+const projection = d3.geoAzimuthalEqualArea().rotate([-14, -52]).fitExtent([[8, 8], [W - 8, H - 8]], frame);
+const path = d3.geoPath(projection);
+const tip = d3.select('#tip'), wrap = document.getElementById('wrap');
+
+Promise.all([d3.json('data/europe.geo.json'), d3.json('data/members.json')]).then(([geo, data]) => {
+  const M = data.countries, notes = data.notes || {};
+  const fill = name => M[name] ? CAT[M[name].status].fill() : css('--none');
+  const html = name => {
+    if (notes[name]) return `<b>${name}</b><br><span class="muted">${notes[name]}</span>`;
+    const m = M[name];
+    if (!m) return `<b>${name}</b><br><span class="muted">No EGP member</span>`;
+    return `<b>${name}</b> · <span class="muted">${CAT[m.status].label}</span><br>${m.party}` +
+      (m.result ? `<br><span class="muted">${m.result}</span>` : '');
+  };
+  const base = css('--surface');
+  svg.append('g').selectAll('path').data(geo.features).join('path')
+    .attr('d', path)
+    .attr('fill', d => fill(d.properties.name))
+    .attr('stroke', d => notes[d.properties.name] ? css('--border-strong') : base)
+    .attr('stroke-width', d => notes[d.properties.name] ? 1 : 0.6)
+    .attr('stroke-dasharray', d => notes[d.properties.name] ? '2 2' : null)
+    .on('mousemove', (ev, d) => {
+      const b = wrap.getBoundingClientRect();
+      let x = ev.clientX - b.left + 12, y = ev.clientY - b.top + 12;
+      if (x > b.width - 260) x -= 272;
+      tip.html(html(d.properties.name)).style('left', x + 'px').style('top', y + 'px').style('opacity', 1);
+      d3.select(ev.currentTarget).attr('stroke', css('--ink')).raise();
+    })
+    .on('mouseleave', (ev, d) => {
+      tip.style('opacity', 0);
+      d3.select(ev.currentTarget).attr('stroke', notes[d.properties.name] ? css('--border-strong') : base);
+    });
+});
+</script>
+</body>
+</html>
