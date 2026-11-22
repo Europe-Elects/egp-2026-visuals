@@ -7,12 +7,13 @@
   --border-strong: #888780;
   --chip: #f1efe8;
   --grid: #e1e0d9;
-  --gain: #2a78d6;
-  --loss: #e34948;
-  --mixed: #b4b2a9;
+  --gain: #2f7a32;
+  --loss: #d7322e;
+  --mixed: #f2d56b;
   --prev: #b4b2a9;
-  --none: #f4f3ef;
-  --member: #dbe7f5;
+  --none: #5f5e5a;
+  --member: #dcebd0;
+  --outside: #f1efe8;
   --hatch-bg: #ecebe6;
   --hatch-line: #888780;
 }
@@ -26,12 +27,13 @@
     --border-strong: #898781;
     --chip: #262624;
     --grid: #2c2c2a;
-    --gain: #3987e5;
+    --gain: #3f9a43;
     --loss: #e66767;
-    --mixed: #6b6a65;
+    --mixed: #e6c95a;
     --prev: #6b6a65;
-    --none: #1f1f1e;
-    --member: #2b3a4d;
+    --none: #3a3a37;
+    --member: #2e4a2c;
+    --outside: #222221;
     --hatch-bg: #2a2a28;
     --hatch-line: #898781;
   }
