@@ -26,30 +26,25 @@ Both are static pages with no build step and no external dependencies. D3 is ven
 
 Still to do before publishing:
 
-- [ ] Check the member list against europeangreens.eu. It shows 34 of the 36 member countries, and the party names for North Macedonia, Romania and Ukraine are missing.
 - [ ] Verify the rows marked `no` or `partly` in `contests.csv`.
 - [ ] After 29 November, update Spain and add the Fribourg government result.
 
 ## Publishing with GitHub Pages
 
-1. Create an empty repository on GitHub, for example `egp-2026-visuals`.
-2. Push this folder:
-   ```bash
-   git remote add origin https://github.com/<your-user>/egp-2026-visuals.git
-   git push -u origin main
-   ```
-3. On GitHub, go to **Settings → Pages**, set **Source** to *Deploy from a branch*, select `main` and `/ (root)`, and click **Save**.
-4. After a minute or two, the charts are live at
-   `https://<your-user>.github.io/egp-2026-visuals/map.html` and `.../dumbbell.html`.
+The repository lives at https://github.com/Europe-Elects/egp-2026-visuals.
+
+1. On GitHub, go to **Settings → Pages**, set **Source** to *Deploy from a branch*, select `main` and `/ (root)`, and click **Save**.
+2. After a minute or two, the charts are live at
+   https://europe-elects.github.io/egp-2026-visuals/map.html and https://europe-elects.github.io/egp-2026-visuals/dumbbell.html.
 
 ## Embedding
 
 ```html
-<iframe src="https://<your-user>.github.io/egp-2026-visuals/map.html"
+<iframe src="https://europe-elects.github.io/egp-2026-visuals/map.html"
         title="Map: European Green Party members and their 2026 results"
         width="100%" height="720" style="border:0" loading="lazy"></iframe>
 
-<iframe src="https://<your-user>.github.io/egp-2026-visuals/dumbbell.html"
+<iframe src="https://europe-elects.github.io/egp-2026-visuals/dumbbell.html"
         title="Chart: Green vote share at the previous election and in 2026"
         width="100%" height="860" style="border:0" loading="lazy"></iframe>
 ```
