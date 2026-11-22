@@ -1,40 +1,175 @@
 {
-  "_note": "Status categories: gains, mixed, setbacks, did_not_run, pending, no_election. Countries not listed have no EGP member. Check the member list against europeangreens.eu (36 countries as of 17 November 2026; 34 listed here).",
+  "_note": "Status categories: gains, mixed, setbacks, did_not_run, pending, no_election. Countries not listed have no EGP member. Member list as of 22 November 2026: 45 parties in 36 countries (Åland counted with Finland).",
   "countries": {
-    "Denmark": {"status": "gains", "party": "SF – Socialistisk Folkeparti", "result": "11.6% (+3.3); back in government"},
-    "Sweden": {"status": "gains", "party": "Miljöpartiet de gröna", "result": "6.1% (+1.0); third-best result ever"},
-    "Latvia": {"status": "gains", "party": "PROGRESĪVIE", "result": "7.9% (+1.6); fifth-largest party"},
-    "United Kingdom": {"status": "gains", "party": "Green Party of England and Wales; Scottish Greens", "result": "Gorton and Denton win; record Holyrood result; first Senedd seats"},
-    "Ireland": {"status": "mixed", "party": "Green Party", "result": "Dublin Central 11.7% (+5.7); Galway West 2.5% (−0.5)"},
-    "Germany": {"status": "mixed", "party": "Bündnis 90/Die Grünen", "result": "Kept Baden-Württemberg; losses in Berlin and Rhineland-Palatinate"},
-    "France": {"status": "mixed", "party": "Les Écologistes", "result": "Lost mayoralties; held Lyon and Tours; gains in Paris"},
-    "Switzerland": {"status": "setbacks", "party": "Grüne / Les Vert.e.s", "result": "Losses in most cantons; lost a seat in the Basel-Landschaft government"},
-    "Cyprus": {"status": "setbacks", "party": "Greens – Citizens’ Cooperation", "result": "2.0% (−2.4); out of parliament for the first time since 2001"},
-    "Malta": {"status": "setbacks", "party": "AD+PD", "result": "1.3%; no seats"},
-    "Bulgaria": {"status": "setbacks", "party": "Zeleno dvizhenie", "result": "0.6% on a joint list; no seats"},
-    "Slovenia": {"status": "setbacks", "party": "Vesna", "result": "Joint list with Levica; no Vesna seats"},
-    "Lithuania": {"status": "setbacks", "party": "Vardan Lietuvos", "result": "Northern Nalšia 5.7% (−7.1); out in first round"},
-    "Czechia": {"status": "setbacks", "party": "Zelení – Strana zelených", "result": "Senate: joint candidacies only"},
-    "Portugal": {"status": "setbacks", "party": "LIVRE; Os Verdes; PAN", "result": "Presidential: Jorge Pinto 0.7%"},
-    "Hungary": {"status": "did_not_run", "party": "Párbeszéd – A Zöldek Pártja", "result": "Did not contest the national election"},
-    "Serbia": {"status": "did_not_run", "party": "Zeleno-levi front", "result": "Backed the Student list; did not run"},
-    "Russia": {"status": "did_not_run", "party": "Green Russia", "result": "Did not stand; elections not free or fair"},
-    "Moldova": {"status": "did_not_run", "party": "Partidul Verde Ecologist", "result": "Did not compete in Gagauzia"},
-    "Estonia": {"status": "did_not_run", "party": "Eestimaa Rohelised", "result": "No Green MPs to vote in the presidential election"},
-    "Spain": {"status": "pending", "party": "Verdes Equo and others", "result": "Regional alliances won no seats; general election on 29 November"},
-    "Austria": {"status": "no_election", "party": "Die Grünen"},
-    "Belgium": {"status": "no_election", "party": "Ecolo; Groen"},
-    "Croatia": {"status": "no_election", "party": "Možemo!"},
-    "Finland": {"status": "no_election", "party": "Vihreät – De Gröna"},
-    "Georgia": {"status": "no_election", "party": "Georgian Greens"},
-    "Greece": {"status": "no_election", "party": "Ecologist Greens (suspended)"},
-    "Italy": {"status": "no_election", "party": "Europa Verde; Verdi – Grüne – Vërc"},
-    "Luxembourg": {"status": "no_election", "party": "déi gréng"},
-    "North Macedonia": {"status": "no_election", "party": "EGP member (add party name)"},
-    "Norway": {"status": "no_election", "party": "Miljøpartiet De Grønne"},
-    "Poland": {"status": "no_election", "party": "Zieloni"},
-    "Romania": {"status": "no_election", "party": "EGP member (add party name)"},
-    "Ukraine": {"status": "no_election", "party": "EGP member (add party name)"}
+    "Denmark": {
+      "status": "gains",
+      "party": "SF – Socialistisk Folkeparti",
+      "result": "11.6% (+3.3); back in government"
+    },
+    "Sweden": {
+      "status": "gains",
+      "party": "Miljöpartiet de gröna",
+      "result": "6.1% (+1.0); third-best result ever"
+    },
+    "Latvia": {
+      "status": "gains",
+      "party": "PROGRESĪVIE",
+      "result": "7.9% (+1.6); fifth-largest party"
+    },
+    "United Kingdom": {
+      "status": "gains",
+      "party": "Green Party of England and Wales; Scottish Greens",
+      "result": "Gorton and Denton win; record Holyrood result; first Senedd seats"
+    },
+    "Ireland": {
+      "status": "mixed",
+      "party": "Green Party",
+      "result": "Dublin Central 11.7% (+5.7); Galway West 2.5% (−0.5)"
+    },
+    "Germany": {
+      "status": "mixed",
+      "party": "Bündnis 90/Die Grünen",
+      "result": "Kept Baden-Württemberg; losses in Berlin and Rhineland-Palatinate"
+    },
+    "France": {
+      "status": "mixed",
+      "party": "Les Écologistes",
+      "result": "Lost mayoralties; held Lyon and Tours; gains in Paris"
+    },
+    "Switzerland": {
+      "status": "setbacks",
+      "party": "Grüne / Les Vert-e-s / Verdi / Verda",
+      "result": "Losses in most cantons; lost a seat in the Basel-Landschaft government"
+    },
+    "Cyprus": {
+      "status": "setbacks",
+      "party": "Greens – Citizens’ Cooperation",
+      "result": "2.0% (−2.4); out of parliament for the first time since 2001"
+    },
+    "Malta": {
+      "status": "setbacks",
+      "party": "Alternattiva Demokratika – Partit Demokratiku (AD+PD)",
+      "result": "1.3%; no seats"
+    },
+    "Bulgaria": {
+      "status": "setbacks",
+      "party": "Zeleno dvizhenie",
+      "result": "0.6% on a joint list; no seats"
+    },
+    "Slovenia": {
+      "status": "setbacks",
+      "party": "Vesna",
+      "result": "Joint list with Levica; no Vesna seats"
+    },
+    "Lithuania": {
+      "status": "setbacks",
+      "party": "Vardan Lietuvos",
+      "result": "Northern Nalšia 5.7% (−7.1); out in first round"
+    },
+    "Czechia": {
+      "status": "setbacks",
+      "party": "Zelení – Strana zelených",
+      "result": "Senate: joint candidacies only"
+    },
+    "Portugal": {
+      "status": "setbacks",
+      "party": "LIVRE; Os Verdes; PAN",
+      "result": "Presidential: Jorge Pinto 0.7%"
+    },
+    "Hungary": {
+      "status": "did_not_run",
+      "party": "Párbeszéd – A Zöldek Pártja",
+      "result": "Did not contest the national election"
+    },
+    "Serbia": {
+      "status": "did_not_run",
+      "party": "Zeleno-levi front",
+      "result": "Backed the Student list; did not run"
+    },
+    "Russia": {
+      "status": "did_not_run",
+      "party": "Green Russia",
+      "result": "Did not stand; elections not free or fair"
+    },
+    "Moldova": {
+      "status": "did_not_run",
+      "party": "Partidul Verde Ecologist",
+      "result": "Did not compete in Gagauzia"
+    },
+    "Estonia": {
+      "status": "did_not_run",
+      "party": "Erakond Eestimaa Rohelised",
+      "result": "No Green MPs to vote in the presidential election"
+    },
+    "Spain": {
+      "status": "pending",
+      "party": "Catalunya en Comú; Esquerra Verda; Verdes Equo",
+      "result": "Regional alliances won no seats; general election on 29 November"
+    },
+    "Austria": {
+      "status": "no_election",
+      "party": "Die Grünen"
+    },
+    "Belgium": {
+      "status": "no_election",
+      "party": "Ecolo; Groen"
+    },
+    "Croatia": {
+      "status": "no_election",
+      "party": "Možemo!; Zelena alternativa – Održivi razvoj Hrvatske"
+    },
+    "Finland": {
+      "status": "no_election",
+      "party": "Vihreä liitto"
+    },
+    "Georgia": {
+      "status": "no_election",
+      "party": "Green Party of Georgia"
+    },
+    "Italy": {
+      "status": "no_election",
+      "party": "Europa Verde – Verdi; Verdi – Grüne – Vërc"
+    },
+    "Luxembourg": {
+      "status": "no_election",
+      "party": "déi gréng"
+    },
+    "North Macedonia": {
+      "status": "no_election",
+      "party": "Democratic Renewal of Macedonia (DOM)"
+    },
+    "Norway": {
+      "status": "no_election",
+      "party": "Miljøpartiet De Grønne"
+    },
+    "Poland": {
+      "status": "no_election",
+      "party": "Partia Zieloni"
+    },
+    "Romania": {
+      "status": "no_election",
+      "party": "Partidul Verde – Verzii"
+    },
+    "Ukraine": {
+      "status": "no_election",
+      "party": "Party of Greens of Ukraine"
+    },
+    "Albania": {
+      "status": "no_election",
+      "party": "Partia e Gjelbër"
+    },
+    "Azerbaijan": {
+      "status": "no_election",
+      "party": "Azerbaijan Green Party"
+    },
+    "Montenegro": {
+      "status": "no_election",
+      "party": "Civic Movement URA"
+    },
+    "Åland": {
+      "status": "no_election",
+      "party": "Hållbart initiativ"
+    }
   },
   "notes": {
     "Netherlands": "GroenLinks merged into Progressief Nederland on 1 July and left the EGP"
